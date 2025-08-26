@@ -24,5 +24,10 @@ jobs:
       - name: Atualizar Repositórios do Helm
         run: helm repo update
       
-      - name: Validar Deploy do Chart do Grafana
-        run: helm upgrade --install grafana grafana/grafana --namespace monitoring -f ./helm-charts/grafana/values.yaml --dry-run --debug
+      # vai funcionar porque o Chart.yaml existe
+      - name: Lint (Validar a Sintaxe) do Chart
+        run: helm lint helm-charts/grafana
+
+      # renderiza o YAML final, sem precisar de um cluster
+      - name: Template (Validar a Logica) do Chart
+        run: helm template grafana grafana/grafana -f helm-charts/grafana/values.yaml --namespace monitoring --debug
