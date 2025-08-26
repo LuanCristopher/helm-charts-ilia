@@ -1,0 +1,10 @@
+
+resources:
+  requests:
+    cpu: "200m"      # 20% de uma CPU
+    memory: "256Mi"  # 256 Megabytes de RAM
+
+  limits:
+    cpu: "1"         # 1 CPU completa
+    memory: "1Gi"    # 1 Gigabyte de RAM
+    #teste de sync
