@@ -16,7 +16,7 @@ jobs:
       - name: Instalar o Helm
         uses: azure/setup-helm@v4
         with:
-          version: '3.x'
+          version: 'v3.15.2'
 
       - name: Adionando Repositório do Grafana
         run: helm repo add grafana https://grafana.github.io/helm-charts
