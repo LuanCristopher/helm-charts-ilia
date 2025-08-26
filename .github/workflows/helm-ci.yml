@@ -24,10 +24,10 @@ jobs:
       - name: Atualizar Repositórios do Helm
         run: helm repo update
       
-      # vai funcionar porque o Chart.yaml existe
+      # CORREÇÃO: O caminho correto é apenas 'grafana/'
       - name: Lint (Validar a Sintaxe) do Chart
-        run: helm lint helm-charts/grafana
+        run: helm lint grafana/
 
-      # renderiza o YAML final, sem precisar de um cluster
-      - name: Template (Validar a Logica) do Chart
-        run: helm template grafana grafana/grafana -f helm-charts/grafana/values.yaml --namespace monitoring --debug
+      # CORREÇÃO: O caminho correto para o values.yaml é 'grafana/values.yaml'
+      - name: Template (Validar a Lógica) do Chart
+        run: helm template grafana grafana/grafana -f grafana/values.yaml --namespace monitoring --debug
