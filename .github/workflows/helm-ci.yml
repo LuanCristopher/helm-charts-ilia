@@ -18,14 +18,11 @@ jobs:
         with:
           version: 'v3.15.2'
 
-      - name: Adionando Repositório do Grafana
+      - name: Adicionar Repositório do Grafana
         run: helm repo add grafana https://grafana.github.io/helm-charts
 
       - name: Atualizar Repositórios do Helm
         run: helm repo update
-
-      - name: Lint (Validar a Sintaxe) do Chart do Grafana
-        run: helm lint ./helm-charts/grafana
-
-      - name: Dry Run (Simular Deploy) do Chart do Grafana
-        run: helm upgrade --install grafana grafana/grafana --namespace monitoring --dry-run --debug
+      
+      - name: Validar Deploy do Chart do Grafana
+        run: helm upgrade --install grafana grafana/grafana --namespace monitoring -f ./helm-charts/grafana/values.yaml --dry-run --debug
