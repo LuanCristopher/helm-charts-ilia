@@ -1,18 +1,11 @@
 grafana:
-  # Habilita o sidecar para descobrir datasources
-  sidecar:
-    datasources:
-      enabled: true
-      label: grafana_datasource
-      
-  # Configuração da Service Account para o IRSA
   serviceAccount:
     create: true
-    name: "grafana"
+    name: grafana
+    automountServiceAccountToken: true
     annotations:
-      eks.amazonaws.com/role-arn: "arn:aws:iam::920120425244:role/ilia-desafio-grafana-irsa-role"
+      eks.amazonaws.com/role-arn: arn:aws:iam::920120425244:role/ilia-desafio-grafana-irsa-role
 
-  # Nossos ajustes de recursos
   resources:
     limits:
       cpu: "1"
@@ -21,18 +14,6 @@ grafana:
       cpu: "200m"
       memory: "256Mi"
 
-  # Provisiona o datasource do Athena
-  datasources:
-    datasources.yaml:
-      apiVersion: 1
-      datasources:
-        - name: Athena
-          type: grafana-athena-datasource
-          access: proxy
-          isDefault: true
-          jsonData:
-            authType: default
-            defaultRegion: "us-east-1"
-            catalog: "AwsDataCatalog"
-            database: "ilia_desafio_db"
-            workgroup: "ilia-desafio-workgroup"
+  env:
+    AWS_REGION: us-east-1
+    
