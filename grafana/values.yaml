@@ -1,19 +1,18 @@
-# Este values.yaml irá sobrescrever os valores padrão do chart do Grafana
-# que estamos importando como dependência.
+grafana:
+  serviceAccount:
+    create: true
+    name: grafana
+    automountServiceAccountToken: true
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::920120425244:role/ilia-desafio-grafana-irsa-role
 
-# Cria uma Service Account para o Grafana
-serviceAccount:
-  create: true
-  name: "grafana"
-  # A anotação que conecta a Service Account ao IAM Role
-  annotations:
-    eks.amazonaws.com/role-arn: "arn:aws:iam::920120425244:role/ilia-desafio-grafana-irsa-role" # <<< SUBSTITUA PELO SEU ACCOUNT ID
+  resources:
+    limits:
+      cpu: "1"
+      memory: "1Gi"
+    requests:
+      cpu: "200m"
+      memory: "256Mi"
 
-# Nossos ajustes de recursos
-resources:
-  limits:
-    cpu: "1"
-    memory: "1Gi"
-  requests:
-    cpu: "200m"
-    memory: "256Mi"
+  env:
+    AWS_REGION: us-east-1

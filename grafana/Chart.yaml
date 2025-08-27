@@ -6,5 +6,6 @@ appVersion: "10.4.1"
 
 dependencies:
 - name: grafana
-  version: "7.3.11" # A mesma versão do chart que usamos antes
+  alias: grafana
+  version: "7.3.11"
   repository: "https://grafana.github.io/helm-charts"
