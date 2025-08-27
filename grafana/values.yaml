@@ -1,5 +1,9 @@
 # A chave principal 'grafana:' que agrupa todas as configurações
 grafana:
+  # --- BLOCO NOVO PARA INSTALAR O PLUGIN ---
+  plugins:
+    - grafana-athena-datasource
+
   # Habilita o sidecar para descobrir datasources a partir de arquivos
   sidecar:
     datasources:
