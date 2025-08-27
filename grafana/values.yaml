@@ -22,8 +22,8 @@ grafana:
       cpu: "1"
       memory: "1Gi"
     requests:
-      cpu: "200m"
-      memory: "256Mi"
+      cpu: "300m"
+      memory: "300Mi"
 
   # Provisiona o datasource do Athena via ConfigMap
   datasources:
