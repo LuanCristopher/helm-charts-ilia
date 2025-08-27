@@ -1,10 +1,15 @@
-
+serviceAccount:
+  create: true
+  name: "grafana"
+  # anotação que conecta a Service Account ao IAM Role
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::920120425244:role/ilia-desafio-grafana-irsa-role" # <<< SUBSTITUA PELO SEU ACCOUNT ID
 resources:
   requests:
-    cpu: "200m"      # 20% de uma CPU
-    memory: "256Mi"  # 256 Megabytes de RAM
+    cpu: "200m"      
+    memory: "256Mi"  
 
   limits:
-    cpu: "1"         # 1 CPU completa
-    memory: "1Gi"    # 1 Gigabyte de RAM
+    cpu: "1"         
+    memory: "1Gi"    
     #teste de sync
