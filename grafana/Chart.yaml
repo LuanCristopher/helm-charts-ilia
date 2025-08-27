@@ -1,0 +1,10 @@
+apiVersion: v2
+name: grafana-umbrella
+description: Meu chart customizado para instalar o Grafana.
+version: 0.1.0
+appVersion: "10.4.1"
+
+dependencies:
+- name: grafana
+  version: "7.3.11" # A mesma versão do chart que usamos antes
+  repository: "https://grafana.github.io/helm-charts"

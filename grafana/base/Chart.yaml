@@ -1,6 +1,0 @@
-apiVersion: v2
-name: grafana-custom
-description: Chart para instalar o Grafana com configuracoes customizadas.
-type: application
-version: 0.1.0
-appVersion: "10.4.1"
