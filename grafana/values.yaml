@@ -1,13 +1,18 @@
-# A chave principal 'grafana:' que agrupa todas as configurações
 grafana:
-  # --- Bloco da Service Account (IRSA) ---
+  # Habilita o sidecar para descobrir datasources
+  sidecar:
+    datasources:
+      enabled: true
+      label: grafana_datasource
+      
+  # Configuração da Service Account para o IRSA
   serviceAccount:
     create: true
-    name: grafana
+    name: "grafana"
     annotations:
       eks.amazonaws.com/role-arn: "arn:aws:iam::920120425244:role/ilia-desafio-grafana-irsa-role"
 
-  # --- Bloco de Recursos (CPU/Memória) ---
+  # Nossos ajustes de recursos
   resources:
     limits:
       cpu: "1"
@@ -16,16 +21,15 @@ grafana:
       cpu: "200m"
       memory: "256Mi"
 
-  # --- Bloco NOVO para provisionar o Datasource do Athena ---
+  # Provisiona o datasource do Athena
   datasources:
-    # O nome do arquivo de configuração que o Helm vai criar dentro do cluster
     datasources.yaml:
       apiVersion: 1
       datasources:
         - name: Athena
           type: grafana-athena-datasource
           access: proxy
-          isDefault: true # Define este como o datasource padrão
+          isDefault: true
           jsonData:
             authType: default
             defaultRegion: "us-east-1"
