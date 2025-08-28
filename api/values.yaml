@@ -1,6 +1,6 @@
 image:
   repository: 920120425244.dkr.ecr.us-east-1.amazonaws.com/ilia-desafio-api
-  tag: "58126911c5cf7a70346fec8680210a58b599fc69" # a pipeline vai trocar para o SHA
+  tag: "fcd84b1cb757cf7a2af6eb0f577fb16ca54f2923" # a pipeline vai trocar para o SHA
   pullPolicy: IfNotPresent
 replicaCount: 1
 service:
