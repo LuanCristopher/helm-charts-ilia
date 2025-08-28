@@ -25,6 +25,12 @@ grafana:
       cpu: "300m"
       memory: "300Mi"
 
+  # --- senha grafana --- #
+  admin:
+    existingSecret: grafana-admin
+    userKey: admin-user
+    passwordKey: admin-password
+
   # --- Datasource do Athena (mantido) ---
   datasources:
     datasources.yaml:
