@@ -1,15 +1,12 @@
 image:
-  repository: 920120425244.dkr.ecr.us-east-1.amazonaws.com/ilia-desafio-api
-  tag: "dev"          # a pipeline vai trocar para o SHA
+  repository: ""
+  tag: "03b86f59b86eade2e83a63898fdb017d0394779a" # a pipeline vai trocar para o SHA
   pullPolicy: IfNotPresent
-
 replicaCount: 1
-
 service:
   type: ClusterIP
   port: 80
-  targetPort: 8000   
-
+  targetPort: 8000
 resources:
   requests:
     cpu: 100m
@@ -17,7 +14,5 @@ resources:
   limits:
     cpu: 300m
     memory: 256Mi
-
 env: []
-
 podAnnotations: {}
