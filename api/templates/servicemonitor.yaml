@@ -1,0 +1,22 @@
+{{- if .Values.metrics.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "api.fullname" . }}
+  namespace: monitoring
+  labels:
+    # Se você instalou o kube-prometheus via ArgoCD Application "kube-prometheus"
+    # o release normalmente é "kube-prometheus". Ajuste se seu release tiver outro nome.
+    release: kube-prometheus
+spec:
+  namespaceSelector:
+    matchNames:
+      - api
+  selector:
+    matchLabels:
+      app: {{ include "api.fullname" . }}
+  endpoints:
+    - port: metrics
+      path: /metrics
+      interval: 30s
+{{- end }}
