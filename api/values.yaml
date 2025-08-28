@@ -1,6 +1,6 @@
 image:
   repository: ""
-  tag: "03b86f59b86eade2e83a63898fdb017d0394779a" # a pipeline vai trocar para o SHA
+  tag: "4da67cb1945a913da835ffcd597095c7d350cb8f" # a pipeline vai trocar para o SHA
   pullPolicy: IfNotPresent
 replicaCount: 1
 service:
