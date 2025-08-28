@@ -1,4 +1,4 @@
-
+# A chave principal 'grafana:' que agrupa todas as configurações
 grafana:
   # --- PLUGINS (mantido) ---
   plugins:
@@ -41,35 +41,13 @@ grafana:
             database: "ilia_desafio_db"
             workgroup: "ilia-desafio-workgroup"
 
-  # ====== BLINDAGEM / ALTA DISPONIBILIDADE ======
-
-  # 1) Tenha 2 réplicas e PDB => mantém pelo menos 1 pronto durante rollouts
+  # --- Alta disponibilidade simples e rollout estável ---
   replicas: 2
   podDisruptionBudget:
     enabled: true
     minAvailable: 1
 
-  # 2) Prioridade alta para não ser preemptado
-  priorityClassName: "monitoring-critical"
-
-  # 3) Evitar que as réplicas caiam no mesmo nó
-  affinity:
-    podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchLabels:
-              app.kubernetes.io/name: grafana
-          topologyKey: kubernetes.io/hostname
-
-  topologySpreadConstraints:
-    - maxSkew: 1
-      topologyKey: kubernetes.io/hostname
-      whenUnsatisfiable: DoNotSchedule
-      labelSelector:
-        matchLabels:
-          app.kubernetes.io/name: grafana
-
-  # 4) Rollout suave (zero indisponibilidade)
+  # Troca 1×1; não cria 3º pod => sem Pending e sem downtime.
   deploymentStrategy:
     type: RollingUpdate
     rollingUpdate:
