@@ -1,0 +1,6 @@
+apiVersion: v2
+name: api
+description: Chart da API Python (ilia-desafio)
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
