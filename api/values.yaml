@@ -1,12 +1,15 @@
 image:
   repository: 920120425244.dkr.ecr.us-east-1.amazonaws.com/ilia-desafio-api
-  tag: "64cd2b7a699e08460fedd067349d272a034becf3" # a pipeline vai trocar para o SHA
+  tag: "64cd2b7a699e08460fedd067349d272a034becf3" # a pipeline troca para o SHA
   pullPolicy: IfNotPresent
+
 replicaCount: 1
+
 service:
   type: ClusterIP
   port: 80
   targetPort: 8000
+
 resources:
   requests:
     cpu: 100m
@@ -14,5 +17,29 @@ resources:
   limits:
     cpu: 300m
     memory: 256Mi
+
+# habilita o ServiceMonitor
+metrics:
+  enabled: true
+
+# probes usando os endpoints que adicionamos no Flask
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: http
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 3
+
+readinessProbe:
+  httpGet:
+    path: /readyz
+    port: http
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 3
+
 env: []
 podAnnotations: {}
