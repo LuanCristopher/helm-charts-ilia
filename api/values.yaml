@@ -1,5 +1,5 @@
 image:
-  repository: "repository: 920120425244.dkr.ecr.us-east-1.amazonaws.com/ilia-desafio-api"
+  repository: repository: 920120425244.dkr.ecr.us-east-1.amazonaws.com/ilia-desafio-api
   tag: "4da67cb1945a913da835ffcd597095c7d350cb8f" # a pipeline vai trocar para o SHA
   pullPolicy: IfNotPresent
 replicaCount: 1
