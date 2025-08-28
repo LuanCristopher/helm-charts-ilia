@@ -36,9 +36,20 @@ grafana:
     enabled: true
     type: pvc
     accessModes: ["ReadWriteOnce"]
+    storageClassName: gp3
     size: 5Gi
     finalizers:
       - kubernetes.io/pvc-protection
+    replicas: 1
+
+  podDisruptionBudget:
+    enabled: false
+
+  deploymentStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
 
   # --- Datasource do Athena (mantido) ---
   datasources:
