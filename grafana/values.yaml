@@ -69,3 +69,13 @@ grafana:
             catalog: "AwsDataCatalog"
             database: "ilia_desafio_db"
             workgroup: "ilia-desafio-workgroup"
+
+        - name: Prometheus
+          type: prometheus
+          access: proxy
+          url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
+          
+        - name: Loki
+          type: loki
+          access: proxy
+          url: http://loki.monitoring.svc.cluster.local:3100
