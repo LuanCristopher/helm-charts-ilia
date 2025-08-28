@@ -1,22 +1,21 @@
-# A chave principal 'grafana:' que agrupa todas as configurações
 grafana:
-  # --- PLUGINS (mantido) ---
+  # Plugins
   plugins:
     - grafana-athena-datasource
 
-  # --- Sidecar para datasources (mantido) ---
+  # Sidecars
   sidecar:
     datasources:
       enabled: true
 
-  # --- Service Account IRSA (mantido) ---
+  # IRSA
   serviceAccount:
     create: true
     name: "grafana"
     annotations:
       eks.amazonaws.com/role-arn: "arn:aws:iam::920120425244:role/ilia-desafio-grafana-irsa-role"
 
-  # --- Recursos (mantido) ---
+  # Recursos
   resources:
     limits:
       cpu: "1"
@@ -25,13 +24,13 @@ grafana:
       cpu: "300m"
       memory: "300Mi"
 
-  # --- senha grafana --- #
+  # Senha via Secret existente
   admin:
     existingSecret: grafana-admin
     userKey: admin-user
     passwordKey: admin-password
-    
-  # --- pvc grafana --- #
+
+  # Persistência (EBS / RWO)
   persistence:
     enabled: true
     type: pvc
@@ -40,18 +39,22 @@ grafana:
     size: 5Gi
     finalizers:
       - kubernetes.io/pvc-protection
-    replicas: 1
 
+  # Réplicas (1 para EBS/RWO)
+  replicas: 1
+
+  # PDB desabilitado (1 réplica)
   podDisruptionBudget:
     enabled: false
 
+  # Rollout 1x1 sem downtime
   deploymentStrategy:
     type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 0
       maxSurge: 1
 
-  # --- Datasource do Athena (mantido) ---
+  # Datasource do Athena
   datasources:
     datasources.yaml:
       apiVersion: 1
@@ -66,16 +69,3 @@ grafana:
             catalog: "AwsDataCatalog"
             database: "ilia_desafio_db"
             workgroup: "ilia-desafio-workgroup"
-
-  # --- Alta disponibilidade simples e rollout estável ---
-  replicas: 2
-  podDisruptionBudget:
-    enabled: true
-    minAvailable: 1
-
-  # Troca 1×1; não cria 3º pod => sem Pending e sem downtime.
-  deploymentStrategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
-      maxSurge: 0
