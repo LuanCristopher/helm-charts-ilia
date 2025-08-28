@@ -30,6 +30,15 @@ grafana:
     existingSecret: grafana-admin
     userKey: admin-user
     passwordKey: admin-password
+    
+  # --- pvc grafana --- #
+  persistence:
+    enabled: true
+    type: pvc
+    accessModes: ["ReadWriteOnce"]
+    size: 5Gi
+    finalizers:
+      - kubernetes.io/pvc-protection
 
   # --- Datasource do Athena (mantido) ---
   datasources:
