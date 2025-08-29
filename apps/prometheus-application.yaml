@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: kube-prometheus-stack
+    # Versão específica para garantir consistência
+    targetRevision: 56.6.0
+    helm:
+      releaseName: kube-prometheus
+      values: |
+        # Mantendo seus valores mínimos para economizar recursos
+        kube-state-metrics:
+          resources:
+            requests: { cpu: 25m, memory: 64Mi }
+
+        prometheus-node-exporter:
+          resources:
+            requests: { cpu: 25m, memory: 64Mi }
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
