@@ -53,10 +53,6 @@ grafana:
     rollingUpdate:
       maxUnavailable: 0
       maxSurge: 1
-      
-  # Load Balancer    
-  service:
-    type: LoadBalancer
 
   # Datasource do Athena + Prometheus + Loki
   datasources:
