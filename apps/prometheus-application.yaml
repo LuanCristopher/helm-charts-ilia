@@ -14,6 +14,8 @@ spec:
       releaseName: kube-prometheus
       values: |
         # Mantendo seus valores mínimos para economizar recursos
+        grafana:
+          enabled: false
         kube-state-metrics:
           resources:
             requests: { cpu: 25m, memory: 64Mi }
