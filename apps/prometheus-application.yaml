@@ -1,3 +1,5 @@
+# helm-charts-ilia/apps/prometheus-application.yaml
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -8,18 +10,20 @@ spec:
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
     chart: kube-prometheus-stack
-    # Versão específica para garantir consistência
     targetRevision: 56.6.0
     helm:
       releaseName: kube-prometheus
       values: |
-        # Mantendo seus valores mínimos para economizar recursos
+        # --- OTIMIZAÇÕES ---
+        alertmanager:
+          enabled: false
         grafana:
           enabled: false
+        # --- FIM DAS OTIMIZAÇÕES ---
+
         kube-state-metrics:
           resources:
             requests: { cpu: 25m, memory: 64Mi }
-
         prometheus-node-exporter:
           resources:
             requests: { cpu: 25m, memory: 64Mi }
