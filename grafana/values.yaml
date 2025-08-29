@@ -75,7 +75,9 @@ grafana:
           access: proxy
           url: http://kube-prometheus-kube-prome-prometheus.monitoring.svc.cluster.local:9090
 
-        - name: Loki
-          type: loki
+        - name: CloudWatch
+          type: cloudwatch
           access: proxy
-          url: http://loki.monitoring.svc.cluster.local:3100
+          jsonData:
+            authType: "arn" 
+            defaultRegion: "us-east-1" 
