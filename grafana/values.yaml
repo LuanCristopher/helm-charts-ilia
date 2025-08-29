@@ -74,9 +74,4 @@ grafana:
           type: prometheus
           access: proxy
           url: http://kube-prometheus-kube-prome-prometheus.monitoring.svc.cluster.local:9090
-          
-        - name: Loki
-          type: loki
-          access: proxy
-          url: http://loki:3100
  
