@@ -13,18 +13,14 @@ spec:
     helm:
       releaseName: fluent-bit
       values: |
-        serviceAccount:
-          create: true
-          name: "fluent-bit"
-          annotations:
-            # COLE O ARN QUE VOCÊ COPIOU DO 'terraform output' AQUI
-            eks.amazonaws.com/role-arn: "arn:aws:iam::920120425244:role/ilia-desafio-fluent-bit-irsa-role"
-
+        # APAGAMOS O BLOCO serviceAccount INTEIRO DAQUI.
+        
+        # O resto da configuração continua igual.
         cloudWatch:
           enabled: true
-          region: "us-east-1" 
-          logGroupName: "/aws/eks/ilia-desafio/logs" 
-          logRetentionDays: 7 
+          region: "us-east-1"
+          logGroupName: "/aws/eks/ilia-desafio/logs"
+          logRetentionDays: 7
 
   destination:
     server: https://kubernetes.default.svc
