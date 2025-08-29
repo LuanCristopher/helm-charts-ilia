@@ -13,9 +13,15 @@ spec:
     helm:
       releaseName: fluent-bit
       values: |
-        # APAGAMOS O BLOCO serviceAccount INTEIRO DAQUI.
-        
-        # O resto da configuração continua igual.
+        # Bloco da Service Account para forçar o uso do IRSA
+        serviceAccount:
+          create: true
+          name: "fluent-bit"
+          annotations:
+            # O ARN correto que você confirmou
+            eks.amazonaws.com/role-arn: "arn:aws:iam::920120425244:role/ilia-desafio-fluent-bit-irsa-role"
+
+        # Configuração para enviar os logs para o CloudWatch
         cloudWatch:
           enabled: true
           region: "us-east-1"
