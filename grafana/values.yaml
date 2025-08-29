@@ -54,6 +54,14 @@ grafana:
       maxUnavailable: 0
       maxSurge: 1
 
+  service:
+    type: LoadBalancer
+    port: 80
+    targetPort: 3000
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+      service.beta.kubernetes.io/aws-load-balancer-type: nlb
+
   # Datasource do Athena + Prometheus + Loki
   datasources:
     datasources.yaml:
