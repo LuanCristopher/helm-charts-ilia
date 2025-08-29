@@ -1,3 +1,4 @@
+# helm-charts-ilia/apps/loki-application.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -15,6 +16,11 @@ spec:
         loki:
           deploymentMode: SingleBinary
           auth_enabled: false
+        
+        # Desabilita o componente opcional que está em crash
+        grafanaAgent:
+          enabled: false
+
         singleBinary:
           replicas: 1
           persistence:
