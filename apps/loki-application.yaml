@@ -16,6 +16,9 @@ spec:
         loki:
           deploymentMode: SingleBinary
           auth_enabled: false
+          
+          canary:
+            enabled: false
         
         # Desabilita o componente opcional que está em crash
         grafanaAgent:
