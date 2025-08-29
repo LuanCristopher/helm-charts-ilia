@@ -34,5 +34,7 @@ readinessProbe:
   periodSeconds: 10
   timeoutSeconds: 2
   failureThreshold: 3
-env: []
+env: 
+  - name: PORT
+    value: "8000"
 podAnnotations: {}
