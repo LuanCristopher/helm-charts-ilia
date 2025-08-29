@@ -13,9 +13,9 @@ spec:
     metadata:
       labels:
         app: {{ include "api.fullname" . }}
+{{- with .Values.podAnnotations }}
       annotations:
-{{- if .Values.podAnnotations }}
-{{ toYaml .Values.podAnnotations | indent 8 }}
+{{ toYaml . | indent 8 }}
 {{- end }}
     spec:
       containers:
@@ -24,7 +24,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.targetPort }}   # 8000
+              containerPort: {{ .Values.service.targetPort }}
 {{- if .Values.env }}
           env:
 {{ toYaml .Values.env | indent 12 }}
