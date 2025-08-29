@@ -74,10 +74,4 @@ grafana:
           type: prometheus
           access: proxy
           url: http://kube-prometheus-kube-prome-prometheus.monitoring.svc.cluster.local:9090
-
-        - name: CloudWatch
-          type: cloudwatch
-          access: proxy
-          jsonData:
-            authType: "arn" 
-            defaultRegion: "us-east-1" 
+ 
