@@ -13,15 +13,21 @@ spec:
     helm:
       releaseName: fluent-bit
       values: |
-        # Bloco da Service Account para forçar o uso do IRSA
-        serviceAccount:
-          create: true
-          name: "fluent-bit"
-          annotations:
-            # O ARN correto que você confirmou
-            eks.amazonaws.com/role-arn: "arn:aws:iam::920120425244:role/ilia-desafio-fluent-bit-irsa-role"
+        # Removido o bloco serviceAccount para não usar IRSA.
 
-        # Configuração para enviar os logs para o CloudWatch
+        # Adiciona as chaves do Secret como variáveis de ambiente no pod.
+        extraEnvVars:
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                name: fluent-bit-aws-credentials
+                key: AWS_ACCESS_KEY_ID
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: fluent-bit-aws-credentials
+                key: AWS_SECRET_ACCESS_KEY
+
         cloudWatch:
           enabled: true
           region: "us-east-1"
