@@ -1,6 +1,6 @@
 image:
   repository: 920120425244.dkr.ecr.us-east-1.amazonaws.com/ilia-desafio-api
-  tag: "6c4e8a94bf3c72761a39c7760bfcf0e321f42b42" # a pipeline troca para o SHA
+  tag: "3b4af0eb6394a8664e1cb555bf87ea6924c89592" # a pipeline troca para o SHA
   pullPolicy: IfNotPresent
 replicaCount: 1
 service:
@@ -34,7 +34,7 @@ readinessProbe:
   periodSeconds: 10
   timeoutSeconds: 2
   failureThreshold: 3
-env: 
+env:
   - name: PORT
     value: "8000"
 podAnnotations: {}
